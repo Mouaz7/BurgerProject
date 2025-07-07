@@ -1,0 +1,9 @@
+{
+    "host": "localhost",
+    "user": "dbadm",
+    "password": "P@ssw0rd",
+    "database": "burger",
+    "connectionLimit": 10,
+    "connectTimeout": 30000  
+  }
+  

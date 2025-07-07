@@ -1,0 +1,38 @@
+<%- include('../partials/header') %>
+
+<div class="orders-container">
+    <h1>Available Burgers</h1>
+    <table class="burger-table">
+        <thead>
+            <tr>
+                <th>Burger Name</th>
+                <th>Price</th>
+                <th>Select</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (burgers && burgers.length > 0) { %>
+                <% burgers.forEach(function(burger) { %>
+                <tr>
+                    <td><%= burger.burger_name %></td> 
+                    <td>
+                        $<%= burger.burger_price !== null && burger.burger_price !== undefined ? parseFloat(burger.burger_price).toFixed(2) : "0.00" %>
+                    </td> 
+                    <td>
+                        <form method="POST" action="/orders/<%= burger.burger_id %>/select">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button type="submit" class="select-btn">Select</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+            <% } else { %>
+                <tr>
+                    <td colspan="3">No burgers available</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
+
+<%- include('../partials/footer') %>

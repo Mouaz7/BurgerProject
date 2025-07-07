@@ -1,0 +1,26 @@
+ingredient_id,name,unit,price
+1,Beef Patty,pcs,10.00
+2,Cheese,slice,5.00
+3,Lettuce,leaf,1.00
+4,Bacon,pcs,3.00
+5,Tomato,slice,0.50
+6,Onion,slice,0.75
+7,Pickles,slice,0.50
+8,Chicken Patty,pcs,8.00
+9,BBQ Sauce,ml,1.50
+10,Spicy Sauce,ml,1.50
+11,Mushroom,slice,2.00
+12,Avocado,slice,3.50
+13,Fish Fillet,pcs,8.00
+14,Swiss Cheese,slice,5.00
+15,Jalapeno,slice,0.75
+16,Black Bean Patty,pcs,6.00
+17,Ham,slice,4.00
+18,Pineapple Ring,pcs,2.50
+19,Mozzarella Cheese,slice,4.50
+20,Spinach,leaf,1.00
+21,Shrimp,pcs,7.00
+22,Garlic Aioli,ml,1.75
+23,Fried Egg,pcs,2.50
+24,Ranch Sauce,ml,1.50
+25,Whole Wheat Bun,pcs,2.00

@@ -1,0 +1,63 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="custom-burger-details-container">
+    <h1>Customize Your Burger</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Ingredient Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (ingredients && ingredients.length > 0) { %>
+                <% ingredients.forEach(function(ingredient) { %>
+                <tr>
+                    <td><%= ingredient.ingredient_name %></td>
+                    <!-- Kontroll för att säkerställa att price alltid är ett nummer -->
+                    <td>$<%= ingredient.ingredient_price !== undefined ? parseFloat(ingredient.ingredient_price).toFixed(2) : "0.00" %></td>
+                    <td><%= ingredient.quantity || 1 %></td>
+                    <!-- Beräkning av subtotal med kontroll av både price och quantity -->
+                    <td>$<%= ingredient.ingredient_price && ingredient.quantity ? (parseFloat(ingredient.ingredient_price) * parseInt(ingredient.quantity, 10)).toFixed(2) : "0.00" %></td>
+                    <td>
+                        <div class="action-buttons">
+                            <form method="POST" action="/orders/custom/<%= customBurgerID %>/remove/<%= ingredient.ingredient_id %>" class="inline-form">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <button type="submit" class="remove-btn">Remove</button>
+                            </form>   
+
+                            <form method="POST" action="/orders/custom/<%= customBurgerID %>/increase/<%= ingredient.ingredient_id %>" class="inline-form">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <button type="submit" class="increase-btn">Add</button>
+                            </form>  
+                        </div>                    
+                    </td>
+                </tr>
+                <% }) %>
+            <% } else { %>
+                <tr>
+                    <td colspan="5">No ingredients found for this burger</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+    
+    <!-- Visa totalpriset -->
+    <div class="total-price">
+        <h3>Total Price: $<%= !isNaN(totalPrice) ? parseFloat(totalPrice).toFixed(2) : "0.00" %></h3>
+    </div>
+
+    <form method="POST" action="/orders/custom/<%= customBurgerID %>/complete">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <label for="customerName">Enter Your Name:</label>
+        <input type="text" id="customerName" name="customerName" required>
+        <input type="hidden" name="totalPrice" value="<%= !isNaN(totalPrice) ? parseFloat(totalPrice).toFixed(2) : "0.00" %>">
+        <button type="submit" class="complete-order-btn">Complete Order</button>
+    </form>
+</div>
+
+<%- include('../partials/footer.ejs') %>
